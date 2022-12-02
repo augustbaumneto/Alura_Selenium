@@ -3,13 +3,11 @@
  */
 package br.com.alura.leilao.login;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+
+import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.leiloes.LeiloesPage;
 import br.com.alura.leilao.parametros.ParametrosTest;
 
@@ -20,31 +18,34 @@ import br.com.alura.leilao.parametros.ParametrosTest;
  * Page Objects do Login
  *
  */
-public class LoginPage {
+public class LoginPage extends PageObject{
 
 	/**
 	 *  URL da Tela de login 
 	 */
-	public static final String URL_LOGIN = "http://localhost:8080/login";
-	private WebDriver driver;
+	private static final String URL_LOGIN = "http://localhost:8080/login";
+	
+	/**
+	 *  Identificadores dos Elementos da página
+	 * 
+	 */
+	
+	private static final String CSS_BOTAO_ENTRAR = "[href='/login']";
+	private static final String ID_CAMPO_USUARIO = "username";
+	private static final String ID_CAMPO_SENHA = "password";
+	private static final String ID_BOTAO_LOGIN = "login-form";
+	private static final String ID_LABEL_USUARIOLOGADO = "usuario-logado";
+	
 	
 	/**
 	 * Construtor da página
 	 */
 	public LoginPage() {
-		this.driver = new ChromeDriver();
-		this.driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		super(null);
 		this.driver.navigate().to(ParametrosTest.URL_INICIAL);
-		this.driver.findElement(By.cssSelector("[href='/login']")).click();
+		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
 	}
 
-	/**
-	 * Método para finalizar o navegador
-	 */
-	public void fechar() {
-		this.driver.quit();
-		
-	}
 	/**
 	 * Preenchimento do formulário de login
 	 * 
@@ -52,8 +53,8 @@ public class LoginPage {
 	 * @param senha		Senha para logar
 	 */
 	public void preencheFormularioAcesso(String usuario, String senha) {
-		driver.findElement(By.id("username")).sendKeys(usuario);
-		driver.findElement(By.id("password")).sendKeys(senha);
+		driver.findElement(By.id(ID_CAMPO_USUARIO)).sendKeys(usuario);
+		driver.findElement(By.id(ID_CAMPO_SENHA)).sendKeys(senha);
 		
 	}
 
@@ -63,7 +64,7 @@ public class LoginPage {
 	 * @return LEiloesPage retorna uma pagina de leiloes
 	 */
 	public LeiloesPage submeteLogin() {
-		driver.findElement(By.id("login-form")).submit();
+		driver.findElement(By.id(ID_BOTAO_LOGIN)).submit();
 		
 		return new LeiloesPage(driver);
 	}
@@ -89,7 +90,7 @@ public class LoginPage {
 	 */
 	public String retornaUsuarioLogado() {
 		try {	
-			return driver.findElement(By.id("usuario-logado")).getText();
+			return driver.findElement(By.id(ID_LABEL_USUARIOLOGADO)).getText();
 		} catch (NoSuchElementException e) {
 			
 			return null ;
@@ -117,16 +118,5 @@ public class LoginPage {
 		return driver.getPageSource().contains(texto);
 	}
 	
-	/**
-	 * 
-	 *    Getter do drive
-	 * 
-	 * @return Webdrive
-	 */
-	public WebDriver getWebDriver(){
-	
-		return this.driver;
-
-	}
 	
 }

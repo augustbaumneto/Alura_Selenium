@@ -1,5 +1,9 @@
 package br.com.alura.leilao.leiloes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +20,22 @@ import br.com.alura.leilao.login.LoginPage;
 public class TestLeiloes {
 	
 	private LeiloesPage paginaleiloes;
+	private LoginPage paginalogin;
+	private CadastroLeilaoPage paginacadastro;
+	private String usuario;
 	
-
+	@BeforeEach
+	/**
+	 * Navegar até a página de leilão
+	 */
+	public void navegaAteLeilao() {
+		this.paginalogin = new LoginPage();
+		usuario = "fulano";
+		this.paginalogin.preencheFormularioAcesso(usuario, "pass");
+		this.paginaleiloes = this.paginalogin.submeteLogin();
+		this.paginacadastro = paginaleiloes.navegarNovoFormulario();
+	}
+	
 	
 	@AfterEach
 	/**
@@ -32,10 +50,31 @@ public class TestLeiloes {
 	 */
 	@Test
 	public void cadastraleilao() {
-		LoginPage paginalogin = new LoginPage();
-		paginalogin.preencheFormularioAcesso("fulano", "pass");
-		paginaleiloes = paginalogin.submeteLogin();
-		CadastroLeilaoPage paginacadastro = paginaleiloes.navegarNovoFormulario();
+		String hoje = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String nome = "Leilao do Dia "+ hoje;
+		String valor = "550.00";
+		
+		this.paginaleiloes=paginacadastro.cadastrarLeiao(nome, valor, hoje);
+		
+		Assert.assertTrue(paginaleiloes.isLeilaoCadastrado(usuario, nome, valor, hoje));
+		Assert.assertTrue(paginaleiloes.contemMensagem("Leilão salvo com sucesso"));
+		
+	}
+	
+	/**
+	 *  Valida preenchimento de campos de cadastro incorretos
+	 */
+	@Test
+	public void cadastraleilaoCamposErrados() {
+		
+		this.paginaleiloes=paginacadastro.cadastrarLeiao("", "", "");
+		
+		Assert.assertFalse(this.paginacadastro.isPaginaCadastro());
+		Assert.assertTrue(this.paginacadastro.isPaginaCadastroErro());
+		Assert.assertTrue(this.paginacadastro.contemMensagemErroNomeTamanhoMinimo());
+		Assert.assertTrue(this.paginacadastro.contemMensagemErroNomeEmBranco());
+		Assert.assertTrue(this.paginacadastro.contemMensagemErroValorMinimo());
+		Assert.assertTrue(this.paginacadastro.contemMensagemErroDataForaFormato());
 		
 	}
 	
