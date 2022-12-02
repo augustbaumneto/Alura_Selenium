@@ -67,7 +67,7 @@ public class CadastroLeilaoPage extends PageObject{
 	 * @param valorinicial	valor do lance inicial
 	 * @param dataabertura	data de inicio do leilao
 	 */
-	public LeiloesPage cadastrarLeiao(String nome, String valorinicial, String dataabertura) {
+	public LeiloesPage cadastrarLeilao(String nome, String valorinicial, String dataabertura) {
 		this.driver.findElement(By.id(ID_CAMPO_NOME)).sendKeys(nome);
 		this.driver.findElement(By.id(ID_CAMPO_DATAABERTURA)).sendKeys(dataabertura);
 		this.driver.findElement(By.id(ID_CAMPO_VALORINICIAL)).sendKeys(valorinicial);
