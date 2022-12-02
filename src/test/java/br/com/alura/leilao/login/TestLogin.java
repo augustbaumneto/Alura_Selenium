@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+import br.com.alura.leilao.leiloes.LeiloesPage;
 import br.com.alura.leilao.parametros.ParametrosTest;
 
 /**
@@ -18,13 +18,15 @@ import br.com.alura.leilao.parametros.ParametrosTest;
 public class TestLogin {
 	
 	private LoginPage paginalogin;
+	private LeiloesPage paginaleilao;
 	
 	@BeforeEach
 	/**
 	 * Setup de cada teste
 	 */
 	public void setup() {
-		this.paginalogin = new LoginPage();
+		this.paginaleilao = new LeiloesPage();
+		this.paginalogin = paginaleilao.acessaLogin();
 	}
 	
 	@AfterEach
@@ -61,6 +63,7 @@ public class TestLogin {
 			
 		Assert.assertFalse(this.paginalogin.ePaginaLogin());
 		Assert.assertTrue(this.paginalogin.contemDado("Usuário e senha inválidos."));
+		Assert.assertTrue(this.paginalogin.mensagemErroUsuarioInvalido());
 		Assert.assertNull(this.paginalogin.retornaUsuarioLogado());
 		
 	}

@@ -5,11 +5,10 @@ package br.com.alura.leilao.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-
+import org.openqa.selenium.WebDriver;
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.leiloes.LeiloesPage;
-import br.com.alura.leilao.parametros.ParametrosTest;
 
 /**
  * @author August Neto
@@ -30,20 +29,19 @@ public class LoginPage extends PageObject{
 	 * 
 	 */
 	
-	private static final String CSS_BOTAO_ENTRAR = "[href='/login']";
 	private static final String ID_CAMPO_USUARIO = "username";
 	private static final String ID_CAMPO_SENHA = "password";
 	private static final String ID_BOTAO_LOGIN = "login-form";
 	private static final String ID_LABEL_USUARIOLOGADO = "usuario-logado";
+
+	private static final String MSG_LOGIN_ERRO = "Usuário e senha inválidos.";
 	
 	
 	/**
 	 * Construtor da página
 	 */
-	public LoginPage() {
-		super(null);
-		this.driver.navigate().to(ParametrosTest.URL_INICIAL);
-		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
+	public LoginPage(WebDriver driver) {
+		super(driver);
 	}
 
 	/**
@@ -116,6 +114,17 @@ public class LoginPage extends PageObject{
 	 */
 	public boolean contemDado(String texto) {
 		return driver.getPageSource().contains(texto);
+	}
+
+	/**
+	 * 
+	 * Verifica se a mensagem de erro esta presente na mensagem
+	 * 
+	 * @return true se mensagem for a correta
+	 */
+	public boolean mensagemErroUsuarioInvalido() {
+		
+		return (this.driver.getPageSource().contains(MSG_LOGIN_ERRO));
 	}
 	
 	

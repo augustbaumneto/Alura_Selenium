@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import br.com.alura.leilao.PageObject;
+import br.com.alura.leilao.login.LoginPage;
 
 /**
  * @author August Neto
@@ -31,15 +32,24 @@ public class LeiloesPage extends PageObject {
 	
 	private static final String ID_BOTAO_NOVO = "novo_leilao_link";
 	private static final String ID_TABELA_LEILOES = "tabela-leiloes";
+	private static final String CSS_BOTAO_ENTRAR = "[href='/login']";
 	
 	
+	/**
+	 * Construtor da página
+	 */
+	public LeiloesPage() {
+		this(null);
+		this.driver.navigate().to(URL_LEILOES);
+	}
+
 	/**
 	 * Construtor da página
 	 */
 	public LeiloesPage(WebDriver driver) {
 		super(driver);
 	}
-
+	
 	/**
 	 *   Clica no botao novo leilao e direciona para a tela de cadastro de formulario
 	 */
@@ -77,6 +87,16 @@ public class LeiloesPage extends PageObject {
 	 */
 	public boolean contemMensagem(String texto) {
 		return driver.getPageSource().contains(texto);
+	}
+	/**
+	 * 
+	 * Acessa a página de Login
+	 * 
+	 * @return LoginPage  a página de login
+	 */
+	public LoginPage acessaLogin(){
+		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
+		return new LoginPage(this.driver);
 	}
 		
 }

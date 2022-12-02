@@ -29,7 +29,8 @@ public class TestLeiloes {
 	 * Navegar até a página de leilão
 	 */
 	public void navegaAteLeilao() {
-		this.paginalogin = new LoginPage();
+		this.paginaleiloes = new LeiloesPage();
+		this.paginalogin = this.paginaleiloes.acessaLogin();
 		usuario = "fulano";
 		this.paginalogin.preencheFormularioAcesso(usuario, "pass");
 		this.paginaleiloes = this.paginalogin.submeteLogin();
@@ -54,7 +55,7 @@ public class TestLeiloes {
 		String nome = "Leilao do Dia "+ hoje;
 		String valor = "550.00";
 		
-		this.paginaleiloes=paginacadastro.cadastrarLeiao(nome, valor, hoje);
+		this.paginaleiloes=paginacadastro.cadastrarLeilao(nome, valor, hoje);
 		
 		Assert.assertTrue(paginaleiloes.isLeilaoCadastrado(usuario, nome, valor, hoje));
 		Assert.assertTrue(paginaleiloes.contemMensagem("Leilão salvo com sucesso"));
@@ -67,7 +68,7 @@ public class TestLeiloes {
 	@Test
 	public void cadastraleilaoCamposErrados() {
 		
-		this.paginaleiloes=paginacadastro.cadastrarLeiao("", "", "");
+		this.paginaleiloes=paginacadastro.cadastrarLeilao("", "", "");
 		
 		Assert.assertFalse(this.paginacadastro.isPaginaCadastro());
 		Assert.assertTrue(this.paginacadastro.isPaginaCadastroErro());
