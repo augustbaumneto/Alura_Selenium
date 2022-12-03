@@ -19,13 +19,14 @@ public class TestLogin {
 	
 	private LoginPage paginalogin;
 	private LeiloesPage paginaleilao;
+	private static final String NAVEGADOR = "chrome";
 	
 	@BeforeEach
 	/**
 	 * Setup de cada teste
 	 */
 	public void setup() {
-		this.paginaleilao = new LeiloesPage();
+		this.paginaleilao = new LeiloesPage(NAVEGADOR);
 		this.paginalogin = paginaleilao.acessaLogin();
 	}
 	

@@ -38,16 +38,16 @@ public class LeiloesPage extends PageObject {
 	/**
 	 * Construtor da página
 	 */
-	public LeiloesPage() {
-		this(null);
+	public LeiloesPage(String navegador) {
+		this(null, navegador);
 		this.driver.navigate().to(URL_LEILOES);
 	}
 
 	/**
 	 * Construtor da página
 	 */
-	public LeiloesPage(WebDriver driver) {
-		super(driver);
+	public LeiloesPage(WebDriver driver, String navegador) {
+		super(driver, navegador);
 	}
 	
 	/**

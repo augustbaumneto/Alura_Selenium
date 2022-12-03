@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * 
@@ -16,11 +17,24 @@ public class PageObject {
 
 	protected WebDriver driver;
 	
-	public PageObject (WebDriver driver) {
+	private static final int TEMPO_ESPERA = 2;
+	
+	public PageObject (WebDriver driver, String navegador) {
 		
 		if (driver==null) {
-			this.driver = new ChromeDriver();
-			this.driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+			//verifica qual o navegador para inicializar o driver
+			switch (navegador) {
+			
+			case "firefox":
+				this.driver = new FirefoxDriver();
+				break;
+				
+			default:
+				this.driver = new ChromeDriver();
+				break;
+			}
+			
+			this.driver.manage().timeouts().implicitlyWait(TEMPO_ESPERA, TimeUnit.SECONDS);
 
 		} else {
 			this.driver = driver;

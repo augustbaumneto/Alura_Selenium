@@ -23,13 +23,14 @@ public class TestLeiloes {
 	private LoginPage paginalogin;
 	private CadastroLeilaoPage paginacadastro;
 	private String usuario;
+	private static final String NAVEGADOR = "chrome";
 	
 	@BeforeEach
 	/**
 	 * Navegar até a página de leilão
 	 */
 	public void navegaAteLeilao() {
-		this.paginaleiloes = new LeiloesPage();
+		this.paginaleiloes = new LeiloesPage(NAVEGADOR);
 		this.paginalogin = this.paginaleiloes.acessaLogin();
 		usuario = "fulano";
 		this.paginalogin.preencheFormularioAcesso(usuario, "pass");

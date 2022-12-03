@@ -41,7 +41,7 @@ public class LoginPage extends PageObject{
 	 * Construtor da página
 	 */
 	public LoginPage(WebDriver driver) {
-		super(driver);
+		super(driver,null);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class LoginPage extends PageObject{
 	public LeiloesPage submeteLogin() {
 		driver.findElement(By.id(ID_BOTAO_LOGIN)).submit();
 		
-		return new LeiloesPage(driver);
+		return new LeiloesPage(driver,null);
 	}
 
 	/**

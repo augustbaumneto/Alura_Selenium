@@ -54,7 +54,7 @@ public class CadastroLeilaoPage extends PageObject{
 	 * Construtor da página
 	 */
 	public CadastroLeilaoPage(WebDriver driver) {
-		super(driver);
+		super(driver,null);
 		
 	}
 
@@ -73,7 +73,7 @@ public class CadastroLeilaoPage extends PageObject{
 		this.driver.findElement(By.id(ID_CAMPO_VALORINICIAL)).sendKeys(valorinicial);
 		this.driver.findElement(By.id(ID_BOTAO_SALVAR)).click();
 		
-		return new LeiloesPage(this.driver);
+		return new LeiloesPage(this.driver,null);
 	}
 
 	/**
