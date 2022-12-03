@@ -4,8 +4,11 @@
 package br.com.alura.leilao.leiloes;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.login.LoginPage;
@@ -55,6 +58,13 @@ public class LeiloesPage extends PageObject {
 	 */
 	public CadastroLeilaoPage navegarNovoFormulario() {
 		this.driver.findElement(By.id(ID_BOTAO_NOVO)).click();
+		
+		try {
+			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LEILOES)));
+		}catch (TimeoutException e) {
+			//PAra evitar a exceção quando a página não muda
+		}
+		
 		return new CadastroLeilaoPage(this.driver);
 	}
 
@@ -96,6 +106,13 @@ public class LeiloesPage extends PageObject {
 	 */
 	public LoginPage acessaLogin(){
 		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
+		
+		try {
+			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LEILOES)));
+		}catch (TimeoutException e) {
+			//PAra evitar a exceção quando a página não muda
+		}
+		
 		return new LoginPage(this.driver);
 	}
 		

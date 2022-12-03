@@ -19,6 +19,8 @@ public class PageObject {
 	
 	private static final int TEMPO_ESPERA = 2;
 	
+	protected static final long TEMPO_ESPERA_ELEMENTO = 4;
+	
 	public PageObject (WebDriver driver, String navegador) {
 		
 		if (driver==null) {

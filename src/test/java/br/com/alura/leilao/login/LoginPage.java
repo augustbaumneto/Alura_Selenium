@@ -5,7 +5,10 @@ package br.com.alura.leilao.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.leiloes.LeiloesPage;
@@ -75,7 +78,13 @@ public class LoginPage extends PageObject{
 	 */
 	
 	public boolean ePaginaLogin() {
+		//Espera a página mudar de url
 		
+		try {
+			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LOGIN)));
+		}catch (TimeoutException e) {
+			//PAra evitar a exceção quando a página não muda
+		}
 		
 		return (driver.getCurrentUrl().equals(URL_LOGIN));
 		

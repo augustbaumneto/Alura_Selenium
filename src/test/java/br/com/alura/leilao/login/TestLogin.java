@@ -19,7 +19,7 @@ public class TestLogin {
 	
 	private LoginPage paginalogin;
 	private LeiloesPage paginaleilao;
-	private static final String NAVEGADOR = "chrome";
+	private static final String NAVEGADOR = "firefox";
 	
 	@BeforeEach
 	/**
@@ -40,9 +40,10 @@ public class TestLogin {
 	
 	/**
 	 * Testa o login com dados válidos
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void efetuaLoginDadosValidos (){
+	public void efetuaLoginDadosValidos () {
 		
 		this.paginalogin.preencheFormularioAcesso("fulano","pass");
 		this.paginalogin.submeteLogin();
