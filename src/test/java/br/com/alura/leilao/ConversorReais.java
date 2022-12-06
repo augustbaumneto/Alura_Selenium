@@ -16,10 +16,8 @@ public class ConversorReais {
 	
 	public String converteReaisExibicao(String valor) {
 		
-		String centavos = valor.substring(valor.length()-2);
-		String reais = valor.substring(0, valor.length()-3);
 		
-		return "R$ "+reais+","+centavos;
+		return "R$ "+valor.replaceAll(".", ",");
 		
 	}
 

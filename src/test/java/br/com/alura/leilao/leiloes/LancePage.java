@@ -23,8 +23,8 @@ public class LancePage extends PageObject {
 	/**
 	 *  URL da Tela de lista de leiloes
 	 */
-	private static final String URL_LANCE = "http://localhost:8080/leiloes/2";
-
+	private static final String URL_LANCE = "http://localhost:8080/lances";
+	private static final String URL_LEILOES2 = "http://localhost:8080/leiloes/2";
 	
 	/**
 	 *  Identificadores dos Elementos da página
@@ -37,6 +37,9 @@ public class LancePage extends PageObject {
 
 
 	private static final String MSG_LANCEOK = "Lance adicionado com sucesso!";
+	private static final String MSG_LANCENOK = "Lance invalido!";
+	private static final String MSG_LANCEVAZIO = "não deve ser nulo";
+	private static final String MSG_LANCEINFERIOR = "deve ser maior que ou igual a 0.1";
 	
 	
 	/**
@@ -54,7 +57,7 @@ public class LancePage extends PageObject {
 	 * @param usuario		usuario que deu o lance	
 	 * @return true 		se lance existe
 	 */
-	public boolean isLeilaoCadastrado(String valorlance, String usuario, String datalance) {
+	public boolean eLanceEnviado(String valorlance, String usuario, String datalance) {
 		//Aguarda carregar a pagina
 		aguardaPagina(URL_LANCE);
 		
@@ -72,7 +75,6 @@ public class LancePage extends PageObject {
 	/**
 	 * Verifica se texto esta presente na página
 	 * 
-	 * @param texto	para consultar na página
 	 * @return	true se contiver
 	 */
 	public boolean contemMensagemLanceOK() {
@@ -87,8 +89,9 @@ public class LancePage extends PageObject {
 	 */
 	public boolean ePaginaLance() {
 		
-		return ePaginaAtual(URL_LANCE);
+		return ePaginaAtual(URL_LANCE)||ePaginaAtual(URL_LEILOES2);
 	}
+	
 	
 	/**
 	 * 
@@ -104,6 +107,33 @@ public class LancePage extends PageObject {
 		this.driver.findElement(By.id(ID_BOTAO_LANCES)).click();
 		
 		
+	}
+
+	/**
+	 * Verifica se texto esta presente na página
+	 * 
+	 * @return	true se contiver
+	 */
+	public boolean contemMensagemLanceNOK() {
+		return driver.getPageSource().contains(MSG_LANCENOK);
+	}
+
+	/**
+	 * Verifica se a mensagem de erro de lance vazio
+	 * 
+	 * @return	true se contiver
+	 */
+	public boolean contemMensagemLanceVazio() {
+		return driver.getPageSource().contains(MSG_LANCEVAZIO);
+	}
+
+	/**
+	 * Verifica se a mensagem de erro de lance inferior ao valor
+	 * 
+	 * @return	true se contiver
+	 */
+	public boolean contemMensagemLanceInferior() {
+		return driver.getPageSource().contains(MSG_LANCEINFERIOR);
 	}
 
 		
