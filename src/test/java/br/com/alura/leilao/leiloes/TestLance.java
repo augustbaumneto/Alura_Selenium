@@ -68,11 +68,11 @@ public class TestLance {
 	 *  Valida preenchimento de campos de cadastro incorretos
 	 */
 	@Test
-	public void cadastraleilaoCamposErrados() {
+	public void tentarlanceIgualValorInicial() {
 		
-		Assert.assertTrue(true);
+		String valorlance = "500.00";
 		
-	/*	this.paginaleiloes=paginacadastro.cadastrarLeilao("", "", "");
+		paginalance.darlance(valorlance);
 		
 		Assert.assertFalse(this.paginacadastro.ePaginaCadastro());
 		Assert.assertTrue(this.paginacadastro.ePaginaCadastroErro());
@@ -80,7 +80,7 @@ public class TestLance {
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroNomeEmBranco());
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroValorMinimo());
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroDataForaFormato());
-		*/
+		
 	}
 	
 }

@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
+import br.com.alura.leilao.ConversorReais;
 import br.com.alura.leilao.PageObject;
 
 
@@ -63,9 +63,10 @@ public class LancePage extends PageObject {
 		WebElement colunadata = linha.findElement(By.cssSelector("td:nth-child(1)"));
 		WebElement colunavalor = linha.findElement(By.cssSelector("td:nth-child(3)"));
 
+		ConversorReais con = new ConversorReais();
 		
 		return (colunausuario.getText().equals(usuario)&&
-				(colunadata.getText().equals(datalance))&&(colunavalor.getText().equals(valorlance)));
+				(colunadata.getText().equals(datalance))&&(colunavalor.getText().equals(con.converteReaisExibicao(valorlance))));
 	}
 	
 	/**
