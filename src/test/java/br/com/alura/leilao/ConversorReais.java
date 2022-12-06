@@ -16,8 +16,9 @@ public class ConversorReais {
 	
 	public String converteReaisExibicao(String valor) {
 		
+		valor = "R$ "+valor;
 		
-		return "R$ "+valor.replaceAll(".", ",");
+		return valor.replace(".", ",");
 		
 	}
 

@@ -68,6 +68,9 @@ public class LancePage extends PageObject {
 
 		ConversorReais con = new ConversorReais();
 		
+		System.out.println(colunavalor.getText()+"    "+ valorlance+ "    "+con.converteReaisExibicao(valorlance));
+		
+		
 		return (colunausuario.getText().equals(usuario)&&
 				(colunadata.getText().equals(datalance))&&(colunavalor.getText().equals(con.converteReaisExibicao(valorlance))));
 	}
