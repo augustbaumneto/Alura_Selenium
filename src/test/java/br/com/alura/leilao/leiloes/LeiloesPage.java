@@ -4,11 +4,9 @@
 package br.com.alura.leilao.leiloes;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.login.LoginPage;
@@ -57,14 +55,13 @@ public class LeiloesPage extends PageObject {
 	 *   Clica no botao novo leilao e direciona para a tela de cadastro de formulario
 	 */
 	public CadastroLeilaoPage navegarNovoFormulario() {
+		//Aguarda carregar a pagina
+		aguardaPagina(URL_LEILOES);
+		
 		this.driver.findElement(By.id(ID_BOTAO_NOVO)).click();
 		
-		try {
-			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LEILOES)));
-		}catch (TimeoutException e) {
-			//PAra evitar a exceção quando a página não muda
-		}
 		
+				
 		return new CadastroLeilaoPage(this.driver);
 	}
 
@@ -79,6 +76,9 @@ public class LeiloesPage extends PageObject {
 	 * @return true se leilao existe
 	 */
 	public boolean isLeilaoCadastrado(String usuario, String nomeLeilao, String valorabertura, String dataabertura) {
+		//Aguarda carregar a pagina
+		aguardaPagina(URL_LEILOES);
+		
 		WebElement linha = this.driver.findElement(By.cssSelector("#"+ID_TABELA_LEILOES+" tbody tr:last-child"));
 		WebElement colunanome = linha.findElement(By.cssSelector("td:nth-child(1)"));
 		WebElement colunadata = linha.findElement(By.cssSelector("td:nth-child(2)"));
@@ -105,13 +105,10 @@ public class LeiloesPage extends PageObject {
 	 * @return LoginPage  a página de login
 	 */
 	public LoginPage acessaLogin(){
-		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
+		//Espera a página carregou
+		aguardaPagina(URL_LEILOES);
 		
-		try {
-			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LEILOES)));
-		}catch (TimeoutException e) {
-			//PAra evitar a exceção quando a página não muda
-		}
+		this.driver.findElement(By.cssSelector(CSS_BOTAO_ENTRAR)).click();
 		
 		return new LoginPage(this.driver);
 	}

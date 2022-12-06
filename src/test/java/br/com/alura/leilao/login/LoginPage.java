@@ -5,10 +5,8 @@ package br.com.alura.leilao.login;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import br.com.alura.leilao.PageObject;
 import br.com.alura.leilao.leiloes.LeiloesPage;
@@ -54,6 +52,9 @@ public class LoginPage extends PageObject{
 	 * @param senha		Senha para logar
 	 */
 	public void preencheFormularioAcesso(String usuario, String senha) {
+		//Aguarda página entrar
+		aguardaPagina(URL_LOGIN);
+		
 		driver.findElement(By.id(ID_CAMPO_USUARIO)).sendKeys(usuario);
 		driver.findElement(By.id(ID_CAMPO_SENHA)).sendKeys(senha);
 		
@@ -65,6 +66,9 @@ public class LoginPage extends PageObject{
 	 * @return LEiloesPage retorna uma pagina de leiloes
 	 */
 	public LeiloesPage submeteLogin() {
+		//Aguarda página entrar
+		aguardaPagina(URL_LOGIN);
+		
 		driver.findElement(By.id(ID_BOTAO_LOGIN)).submit();
 		
 		return new LeiloesPage(driver,null);
@@ -80,14 +84,9 @@ public class LoginPage extends PageObject{
 	public boolean ePaginaLogin() {
 		//Espera a página mudar de url
 		
-		try {
-			new WebDriverWait(this.driver, TEMPO_ESPERA_ELEMENTO).until(ExpectedConditions.not(ExpectedConditions.urlToBe(URL_LOGIN)));
-		}catch (TimeoutException e) {
-			//PAra evitar a exceção quando a página não muda
-		}
+		return ePaginaAtual(URL_LOGIN);
 		
-		return (driver.getCurrentUrl().equals(URL_LOGIN));
-		
+
 	}
 
 	/**
