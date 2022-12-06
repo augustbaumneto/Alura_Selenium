@@ -23,7 +23,7 @@ public class TestLeiloes {
 	private LoginPage paginalogin;
 	private CadastroLeilaoPage paginacadastro;
 	private String usuario;
-	private static final String NAVEGADOR = "chrome";
+	private static final String NAVEGADOR = "firefox";
 	
 	@BeforeEach
 	/**
@@ -56,6 +56,8 @@ public class TestLeiloes {
 		String nome = "Leilao do Dia "+ hoje;
 		String valor = "550.00";
 		
+		System.out.println(nome + "    "+ hoje+ "    "+valor);
+		
 		this.paginaleiloes=paginacadastro.cadastrarLeilao(nome, valor, hoje);
 		
 		Assert.assertTrue(paginaleiloes.isLeilaoCadastrado(usuario, nome, valor, hoje));
@@ -71,8 +73,8 @@ public class TestLeiloes {
 		
 		this.paginaleiloes=paginacadastro.cadastrarLeilao("", "", "");
 		
-		Assert.assertFalse(this.paginacadastro.isPaginaCadastro());
-		Assert.assertTrue(this.paginacadastro.isPaginaCadastroErro());
+		Assert.assertFalse(this.paginacadastro.ePaginaCadastro());
+		Assert.assertTrue(this.paginacadastro.ePaginaCadastroErro());
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroNomeTamanhoMinimo());
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroNomeEmBranco());
 		Assert.assertTrue(this.paginacadastro.contemMensagemErroValorMinimo());

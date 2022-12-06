@@ -68,6 +68,10 @@ public class CadastroLeilaoPage extends PageObject{
 	 * @param dataabertura	data de inicio do leilao
 	 */
 	public LeiloesPage cadastrarLeilao(String nome, String valorinicial, String dataabertura) {
+		
+		//Checa se já carregou a página
+		aguardaPagina(URL_CADASTRO_LEILAO);
+		
 		this.driver.findElement(By.id(ID_CAMPO_NOME)).sendKeys(nome);
 		this.driver.findElement(By.id(ID_CAMPO_DATAABERTURA)).sendKeys(dataabertura);
 		this.driver.findElement(By.id(ID_CAMPO_VALORINICIAL)).sendKeys(valorinicial);
@@ -82,9 +86,10 @@ public class CadastroLeilaoPage extends PageObject{
 	 * 
 	 * @return	true se estiver na url correta
 	 */
-	public boolean isPaginaCadastro() {
+	public boolean ePaginaCadastro() {
 		
-		return this.driver.getCurrentUrl().equals(URL_CADASTRO_LEILAO);
+		
+		return ePaginaAtual(URL_CADASTRO_LEILAO);
 		
 	}
 
@@ -94,9 +99,10 @@ public class CadastroLeilaoPage extends PageObject{
 	 * 
 	 * @return	true se estiver na url correta
 	 */
-	public boolean isPaginaCadastroErro() {
+	public boolean ePaginaCadastroErro() {
 		
-		return this.driver.getCurrentUrl().equals(URL_CADASTRO_LEILAO_ERRO);
+		
+		return ePaginaAtual(URL_CADASTRO_LEILAO_ERRO);
 		
 	}
 	
