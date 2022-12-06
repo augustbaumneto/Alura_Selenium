@@ -19,7 +19,7 @@ public class TestLogin {
 	
 	private LoginPage paginalogin;
 	private LeiloesPage paginaleilao;
-	private static final String NAVEGADOR = "firefox";
+	private static final String NAVEGADOR = "chrome";
 	
 	@BeforeEach
 	/**

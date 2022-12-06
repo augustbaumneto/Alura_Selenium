@@ -82,7 +82,6 @@ public class LoginPage extends PageObject{
 	 */
 	
 	public boolean ePaginaLogin() {
-		//Espera a página mudar de url
 		
 		return ePaginaAtual(URL_LOGIN);
 		

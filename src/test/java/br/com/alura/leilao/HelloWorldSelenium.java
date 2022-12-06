@@ -10,7 +10,7 @@ import br.com.alura.leilao.leiloes.LeiloesPage;
 
 public class HelloWorldSelenium {
 
-	private static final String NAVEGADOR = "firefox";
+	private static final String NAVEGADOR = "chrome";
 
 
 	@Test
